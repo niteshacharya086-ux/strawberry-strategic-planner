@@ -9,6 +9,7 @@ Deno.serve(async req=>{
   const {data:guild,error:ge}=await admin.from('guilds').select('status').eq('id',gid).maybeSingle();
   if(me||ge) throw me||ge; if(membership?.role!=='guild_admin'||guild?.status!=='active') return respond({error:'Guild Admin permission required'},403);
   if(action==='set-role'){
+   if(String(b.user_id)===user.id) return respond({error:'You cannot change your own role'},403);
    if(!['guild_admin','planner','member'].includes(b.role)) throw new Error('Invalid role');
    const {error}=await admin.from('guild_memberships').upsert({guild_id:gid,user_id:b.user_id,role:b.role}); if(error) throw error;
    await audit(admin,user.id,action,{role:b.role},String(b.user_id),gid);
