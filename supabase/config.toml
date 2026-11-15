@@ -1,0 +1,10 @@
+[functions.bootstrap-main-admin]
+verify_jwt = true
+[functions.username-login]
+verify_jwt = false
+[functions.register-account]
+verify_jwt = true
+[functions.platform-admin]
+verify_jwt = true
+[functions.guild-admin]
+verify_jwt = true
