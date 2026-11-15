@@ -60,6 +60,7 @@ Deno.serve(async req=>{
     await audit(admin,user.id,action,{username:b.username},String(b.user_id)); break;
    }
    case 'set-role': {
+    if(String(b.user_id)===user.id) throw new Error('You cannot change your own role');
     if(!validRole(String(b.role))) throw new Error('Invalid guild role');
     const {error}=await admin.from('guild_memberships').upsert({guild_id:b.guild_id,user_id:b.user_id,role:b.role}); if(error) throw error;
     await audit(admin,user.id,action,{role:b.role},String(b.user_id),String(b.guild_id)); break;
