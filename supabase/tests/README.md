@@ -13,6 +13,7 @@ Run these checks only against a disposable Supabase project after applying the m
 | Guild A planner | Change memberships, roles, guilds, accounts, platform settings | Denied |
 | Guild A guild admin | Manage Guild A memberships and content; invite users | Allowed through `guild-admin` with valid JWT |
 | Guild A guild admin | Modify Guild B or platform-wide accounts/settings | Denied |
+| Guild A guild admin | Change their own guild role through `guild-admin` | Denied |
 | Guild A guild admin | Delete a Guild A player | Allowed only within Guild A |
 | Any signed-in non-admin | Call `platform-admin` with arbitrary action or forged body | HTTP 403; no mutation/audit-as-admin |
 | Unauthenticated user | Call `platform-admin` | Rejected by gateway/function authorization |
